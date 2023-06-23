@@ -7,12 +7,11 @@
 :8081 {
     encode zstd gzip
 
+    root * /app
+    file_server
+
     handle_path /api/* {
 	    rewrite * {path}
-	    reverse_proxy http://mars.atlocal:26010
-    }
-
-    handle_path /* {
-        reverse_proxy http://localhost:5173
+	    reverse_proxy {$VALHEIM_URI}
     }
 }
