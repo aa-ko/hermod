@@ -1,0 +1,18 @@
+{
+    debug
+    http_port 8081
+    auto_https off
+}
+
+:8081 {
+    encode zstd gzip
+
+    handle_path /api/* {
+	    rewrite * {path}
+	    reverse_proxy http://mars.atlocal:26010
+    }
+
+    handle_path /* {
+        reverse_proxy http://localhost:5173
+    }
+}
