@@ -9,7 +9,7 @@ An example docker-compose file would look like this:
 version: "3"
 services:
   hermod:
-    image: hermod:0.1.3
+    image: aako/hermod:0.1.3
     ports:
       - 8089:8081/tcp
     environment:
