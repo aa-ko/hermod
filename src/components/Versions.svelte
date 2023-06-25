@@ -25,6 +25,18 @@
     let parsedVersions = parseVersionString(versionString);
 </script>
 
-{#each parsedVersions as version}
-    <p class="version">{version.name} : {version.value}</p>
-{/each}
+<div class="versions">
+    {#each parsedVersions as version}
+        <p class="version">{version.name} : {version.value}</p>
+    {/each}
+</div>
+
+<style>
+    .versions {
+        padding-bottom: 20px;
+    }
+
+    .version {
+        font-size: larger;
+    }
+</style>

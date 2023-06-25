@@ -24,18 +24,6 @@
 </div>
 
 <style>
-    /* hr {
-        align-self: center;
-        width: 70%;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    } */
-
-    .version {
-        font-size: larger;
-        padding-bottom: 80px;
-    }
-
     .maininfo {
         margin: auto;
         margin-bottom: 25px;

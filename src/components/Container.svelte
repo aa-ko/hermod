@@ -6,10 +6,11 @@
 
     import type { StatusData } from "./StatusData";
 
+    import { dev } from "$app/environment";
+
     const statusUri = "/api/status";
 
     let statusData: StatusData;
-    $: jobs = statusData.jobs;
 
     onMount(async () => {
         await refreshData();
@@ -31,6 +32,9 @@
             if (!statusData.jobs) {
                 statusData.jobs = [];
             }
+            // This was useful for testing.
+            // var now = new Date();
+            // statusData.players = now.getSeconds();
         } else {
             console.error("Request failed.");
             console.error(await response.blob());
@@ -42,21 +46,33 @@
 
 <svelte:head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin="anonymous"
+    />
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
     />
-    <title>Hermod - {statusData.name}</title>
+    {#if statusData}
+        <title>Hermod - {statusData.name}</title>
+    {:else}
+        <title>Hermod</title>
+    {/if}
 </svelte:head>
 
 <div id="box">
-    <MainInfo statusData={statusData} />
-    <div id="jobs">
-        {#each jobs as job}
-            <JobCard jobData={job} />
-        {/each}
-    </div>
+    {#if statusData}
+        <MainInfo {statusData} />
+        <div id="jobs">
+            {#each statusData.jobs as job}
+                <JobCard jobData={job} />
+            {/each}
+        </div>
+    {:else}
+        <p>No status data.</p>
+    {/if}
 </div>
 
 <style>
