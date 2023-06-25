@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
     import cronstrue from "cronstrue";
+    import type { JobData } from "./StatusData";
 
-    export let jobProps;
+    export let jobData: JobData;
 
     let prettyName = (() => {
-        switch (jobProps.name) {
+        switch (jobData.name) {
             case "AUTO_UPDATE":
                 return "Auto Update";
             case "AUTO_BACKUP":
@@ -15,7 +16,7 @@
     })();
 
     let prettyEnabled = (() => {
-        switch (jobProps.enabled) {
+        switch (jobData.enabled) {
             case true:
                 return "Yes";
             case false:
@@ -38,8 +39,8 @@
 
     <div class="header">
         <div class="schedule infoKey">Schedule:</div>
-        <div class="schedule infoValue" title={jobProps.schedule}>
-            {cronstrue.toString(jobProps.schedule)}
+        <div class="schedule infoValue" title={jobData.schedule}>
+            {cronstrue.toString(jobData.schedule)}
         </div>
     </div>
 </div>

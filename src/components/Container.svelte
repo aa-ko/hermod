@@ -1,14 +1,15 @@
-<script>
+<script lang="ts">
     import { onMount } from "svelte";
 
     import MainInfo from "./MainInfo.svelte";
     import JobCard from "./JobCard.svelte";
 
-    const statusUri = "/api/status";
-    //const statusUri = "http://localhost:8081/api/status";
+    import type { StatusData } from "./StatusData";
 
-    let data = {};
-    $: jobs = data.jobs ? data.jobs : [];
+    const statusUri = "/api/status";
+
+    let statusData: StatusData;
+    $: jobs = statusData.jobs;
 
     onMount(async () => {
         await refreshData();
@@ -26,7 +27,10 @@
             cache: "no-cache",
         });
         if (response.ok) {
-            data = await response.json();
+            statusData = await response.json();
+            if (!statusData.jobs) {
+                statusData.jobs = [];
+            }
         } else {
             console.error("Request failed.");
             console.error(await response.blob());
@@ -43,14 +47,14 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
     />
-    <title>Hermod - {data.name}</title>
+    <title>Hermod - {statusData.name}</title>
 </svelte:head>
 
 <div id="box">
-    <MainInfo {data} />
+    <MainInfo statusData={statusData} />
     <div id="jobs">
         {#each jobs as job}
-            <JobCard jobProps={job} />
+            <JobCard jobData={job} />
         {/each}
     </div>
 </div>
