@@ -1,17 +1,17 @@
 {
-    debug
-    http_port 8081
-    auto_https off
+	debug
+	http_port 8081
+	auto_https off
 }
 
 :8081 {
-    encode zstd gzip
+	encode zstd gzip
 
-    root * /app
-    file_server
+	root * /app
+	file_server
 
-    handle_path /api/* {
-	    rewrite * {path}
-	    reverse_proxy {$VALHEIM_URI}
-    }
+	handle_path /api/* {
+		rewrite * {path}
+		reverse_proxy {$VALHEIM_URI}
+	}
 }

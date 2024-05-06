@@ -14,6 +14,8 @@ services:
       - 8089:8081/tcp
     environment:
       - VALHEIM_URI="valheim:26010"
+
+  # Your Valheim Server goes here.
 ```
 
 ## Development
@@ -37,3 +39,4 @@ The background images/screenshots are random finds of Valheim content from Googl
 - Make a dark theme.
 - Show live server logs in the bottom. This might require a backend that attaches to the logs of the server container. Attach to that via websocket.
 - Add GitHub actions for automatic builds.
+- Show installed and running mods.

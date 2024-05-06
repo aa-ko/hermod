@@ -32,16 +32,11 @@
             if (!statusData.jobs) {
                 statusData.jobs = [];
             }
-            // This was useful for testing.
-            // var now = new Date();
-            // statusData.players = now.getSeconds();
         } else {
             console.error("Request failed.");
             console.error(await response.blob());
         }
     }
-
-    // TODO: Add mod list display.
 </script>
 
 <svelte:head>
