@@ -25,6 +25,13 @@ Specify the IP or hostname of your Valheim server in place of `MYVALHEIMSERVER`.
 1. Build the image: `docker build -t hermod:dev .`
 2. Run: `docker run --rm -p 8089:8081/tcp -e VALHEIM_URI="MYVALHEIMSERVER:26010" --name hermod-dev hermod:dev`
 
+## Images
+Images found in `/static` are not mine!
+
+The `favicon.png` has been generated with [Craiyon AI](https://www.craiyon.com/).
+
+The background images/screenshots are random finds of Valheim content from Google Image Search.
+
 ## TODO 
 - Replace screenshots with the images from the official press kit.
 - Make a dark theme.
