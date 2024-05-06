@@ -1,4 +1,4 @@
-FROM node:20.3-alpine3.17 as build
+FROM node:22-alpine3.18 as build
 
 COPY . /svelte
 WORKDIR /svelte
