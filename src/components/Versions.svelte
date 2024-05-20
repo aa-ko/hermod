@@ -22,7 +22,20 @@
         return result;
     }
 
-    let parsedVersions = parseVersionString(versionString);
+    function expandVersionString(versions: Array<VersionTuple>): Array<VersionTuple> {
+        return versions.map(v => {
+            switch (v.name) {
+                case "g":
+                    return { name: "Game Version", value: v.value };
+                case "n":
+                    return { name: "Network Version", value: v.value };
+                default:
+                    return v;
+            }
+        });
+    }
+
+    let parsedVersions = expandVersionString(parseVersionString(versionString));
 </script>
 
 <div class="versions">
