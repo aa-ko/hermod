@@ -56,7 +56,7 @@
     }
 
     #container {
-        width: 45%;
+        width: 40%;
         height: 105px;
         margin: 10px 20px 10px 20px;
         padding: 14px;

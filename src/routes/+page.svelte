@@ -41,7 +41,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 2;
-		width: 90%;
+		width: 80%;
 		padding: 20px;
 		text-align: center;
 	}
