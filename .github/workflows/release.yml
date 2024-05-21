@@ -12,6 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+    - name: Docker metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          aako/hermod
+          ghcr.io/aa-ko/hermod
+        tags: |
+          type=semver,pattern={{major}}.{{minor}}.{{patch}}
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
@@ -29,6 +40,5 @@ jobs:
         context: .
         platforms: linux/amd64
         push: true
-        tags: |
-          aako/hermod:latest
-          ghcr.io/aa-ko/hermod:latest
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
