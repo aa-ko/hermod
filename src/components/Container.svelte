@@ -20,21 +20,53 @@
     });
 
     async function refreshData() {
-        var response = await fetch(statusUri, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            cache: "no-cache",
-        });
-        if (response.ok) {
-            statusData = await response.json();
-            if (!statusData.jobs) {
-                statusData.jobs = [];
-            }
+        // Return sample data when running in dev environment.
+        if (dev) {
+            statusData = JSON.parse(
+                `
+                {
+                    "name": "Your Valheim Server",
+                    "version": "g=0.218.15,n=27,m=",
+                    "players": 4,
+                    "max_players": 64,
+                    "map": "Your Valheim Server",
+                    "online": true,
+                    "bepinex": {
+                        "enabled": false,
+                        "mods": []
+                    },
+                    "jobs": [
+                        {
+                        "name": "AUTO_UPDATE",
+                        "enabled": true,
+                        "schedule": "0 */2 * * *"
+                        },
+                        {
+                        "name": "AUTO_BACKUP",
+                        "enabled": true,
+                        "schedule": "*/30 * * * *"
+                        }
+                    ]
+                }
+            `,
+            );
         } else {
-            console.error("Request failed.");
-            console.error(await response.blob());
+            var response = await fetch(statusUri, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                cache: "no-cache",
+            });
+            if (response.ok) {
+                statusData = await response.json();
+                if (!statusData.jobs) {
+                    statusData.jobs = [];
+                }
+            } else {
+                console.error("Request failed.");
+                console.error(await response.blob());
+            }
         }
     }
 </script>
